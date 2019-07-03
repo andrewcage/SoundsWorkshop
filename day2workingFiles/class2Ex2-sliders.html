@@ -1,0 +1,105 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AD 2019 Test</title>
+
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+</head>
+
+<body>
+
+<button onclick="start()"> 
+start 
+</button>
+
+<button onclick="stop()"> 
+stop 
+</button>
+
+<br>
+<label> oscillator 1 frequency</label><input type="range" onChange="osc1Freq(this)" min="20" max="220"/> 
+
+<br>
+<label> oscillator 1 volume</label><input type="range" onChange="osc1Vol(this)" min="-100" max="0"/> 
+
+<br>
+<label> oscillator 2 frequency</label><input type="range" onChange="osc2Freq(this)" min="20" max="220"/> 
+
+<br>
+<label> oscillator 2 volume</label><input type="range" onChange="osc2Vol(this)" min="-100" max="0"/> 
+
+<script type="text/javascript"> 
+
+console.log("class two tone test, testing, 1...2...3"); 
+
+var osc = new Tone.Oscillator({
+			"type" : "sawtooth",
+			"frequency" : 2200,
+			"volume" : -12
+
+}).toMaster(); 
+
+
+var osc2 = new Tone.Oscillator({
+			"type" : "square",
+			"frequency" : 220,
+			"volume" : -12
+		}).toMaster();
+
+function start(){ 
+	osc.start(); 
+	osc2.start(); 
+}
+
+function stop(){
+	osc.stop(); 
+	osc2.stop(); 
+
+	// osc.volume.value = -100; 
+	// osc2.volume.value = -100; 
+	//the volume is measured in db so that is way it is -100 (versus 0)
+	//here the setVolume 2nd argument does not need a + 
+	// console.log(osc.output.gain.value); 
+}
+
+function osc1Freq(element){
+	var freq1 = parseInt(element.value);
+
+	osc.frequency.value = freq1; 
+	console.log('frequency 1 is ', freq1); 
+}
+
+function osc1Vol(element){
+	var vol1 = parseInt(element.value);
+
+	osc.volume.value = vol1; 
+	console.log('the volume for frequency 1 is', vol1); 
+}
+
+function osc2Freq(element){
+	var freq2 = parseInt(element.value);
+
+	osc2.frequency.value = freq2; 
+	console.log('frequency 2 is ', freq2); 
+}
+
+function osc2Vol(element){
+	var vol2 = parseInt(element.value);
+
+	osc2.volume.value = vol2; 
+	console.log('the volume for frequency 1 is', vol2); 
+}
+
+
+
+
+</script>
+
+</body>
+</html>

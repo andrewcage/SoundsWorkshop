@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>tone js oscillator </title>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script> -->
+
+<script type="text/javascript" src="../build/Tone.js"> </script>
+
+
+</head>
+
+<body>
+
+<button onclick="start()"> 
+start 
+</button>
+
+<button onclick="stop()"> 
+stop 
+</button>
+
+<script type="text/javascript"> 
+
+console.log("class one tone test, testing, 1...2...3"); 
+//look at the website below to see the parameters for the oscillators in tone.js
+//https://tonejs.github.io/docs/r13/Oscillator
+
+var osc = new Tone.Oscillator({
+			"type" : "sawtooth",
+			"frequency" : 2200,
+			"volume" : 0
+
+}).toMaster(); 
+
+ 
+
+var osc2 = new Tone.Oscillator({
+			"type" : "square",
+			"frequency" : 220,
+			"volume" : -46
+		}).toMaster();
+
+function start(){
+
+	osc.start(); 
+	osc2.start(); 
+}
+
+function stop(){
+	osc.stop(); 
+	osc2.stop(); 
+}
+
+</script>
+
+</body>
+</html>

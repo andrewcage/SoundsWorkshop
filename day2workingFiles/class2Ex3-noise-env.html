@@ -1,0 +1,103 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NOISE!</title>
+
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<button onclick="start()"> 
+start 
+</button>
+
+<button onclick="stop()"> 
+
+stop 
+</button>
+
+<br>
+<button onmousedown="noteTrigger()" onmouseup="triggerRelease()"> 
+trigger envelope 
+</button>
+
+<button onclick="trigAR()"> 
+trigger attack and release  
+</button>
+
+<br>
+<label> noise 1 volume</label><input type="range" onChange="osc1Vol(this)" min="-100" max="0"/> 
+
+
+
+<br>
+<label> noise 2 volume</label><input type="range" onChange="osc2Vol(this)" min="-100" max="0"/> 
+
+<script type="text/javascript"> 
+
+console.log("neu noise yes"); 
+
+var n1 = new Tone.Noise({
+			"type" : "pink"
+
+}); 
+
+ 
+
+function start(){
+	n1.start(); 
+	
+}
+
+function stop(){
+	n1.stop(); 
+
+}
+
+var env = new Tone.AmplitudeEnvelope({
+	"attack" : 2,
+	"decay" : 2,
+	"sustain" : 2,
+	"release" : 2,
+}); 
+
+n1.connect(env);
+env.toMaster(); 
+
+function noteTrigger(){
+	env.triggerAttack();
+}
+
+
+function osc1Vol(element){
+	var vol1 = parseInt(element.value);
+	
+
+	console.log('the volume for frequency 1 is', vol1); 
+}
+
+
+function triggerRelease(){
+	env.triggerRelease();
+}
+
+function trigAR(){
+	env.triggerAttackRelease(.5);
+}
+
+
+
+
+</script>
+
+</body>
+</html>

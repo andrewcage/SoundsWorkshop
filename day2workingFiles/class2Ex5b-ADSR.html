@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADSR two ways </title>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+
+</head>
+
+<body>
+
+<!-- <button onclick="start()"> 
+start 
+</button>
+
+<button onclick="stop()"> 
+stop 
+</button> -->
+
+<button onmousedown="noteTrigger()" onmouseup="triggerRelease()"> 
+trigger envelope 
+</button>
+
+<button onclick="trigAR()"> 
+trigger attack and release  
+</button>
+
+<script type="text/javascript"> 
+
+console.log("ADSR"); 
+//look at the website below to see the parameters for the amplitude envelope in tone.js
+//https://tonejs.github.io/docs/r13/AmplitudeEnvelope
+
+var osc = new Tone.Oscillator({
+			"type" : "sawtooth",
+			"frequency" : 220,
+			"volume" : 0
+
+}); 
+
+
+// var env = new Tone.AmplitudeEnvelope(.5, .2, .2, .1); 
+
+
+var env = new Tone.AmplitudeEnvelope({
+	"attack" : 0.9,
+	"decay" : 0.2,
+	"sustain" : 1,
+	"release" : 0.9,
+}); 
+
+osc.connect(env);
+env.toMaster(); 
+
+function noteTrigger(){
+	env.triggerAttack();
+}
+
+function triggerRelease(){
+	env.triggerRelease();
+}
+
+function trigAR(){
+	env.triggerAttackRelease(.5);
+}
+
+osc.start(); 
+
+</script>
+
+</body>
+</html>

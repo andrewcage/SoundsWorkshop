@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADSR two ways </title>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+
+</head>
+
+<body>
+
+<!-- <button onclick="start()"> 
+start 
+</button>
+
+<button onclick="stop()"> 
+stop 
+</button> -->
+
+
+<button onclick="trig1()"> 
+trigger 1  
+</button>
+
+<button onclick="trig2()"> 
+trigger 2 
+</button>
+
+<button onclick="trig3()"> 
+trigger 3  
+</button>
+
+<button onclick="trig4()"> 
+trigger 4  
+</button>
+
+<button onclick="trig5()"> 
+trigger 5 sequence  
+</button>
+
+<script type="text/javascript"> 
+
+console.log("Player class 3"); 
+
+var p1 = new Tone.Player("audio/f1.mp3").toMaster();
+var p2 = new Tone.Player("audio/f2.mp3").toMaster();
+var p3 = new Tone.Player("audio/m1.mp3").toMaster();
+var p4 = new Tone.Player("audio/m2.mp3").toMaster();
+var p5 = new Tone.Player("audio/m3.mp3").toMaster();
+p1.loop.value = 'false'; 
+p2.loop.value = 'false'; 
+p3.loop.value = 'false'; 
+p4.loop.value = 'false'; 
+p5.loop.value = 'false'; 
+
+function trig1(){
+	p1.start(); 
+	
+}
+
+function trig2(){
+	p2.start(); 
+}
+
+function trig3(){
+	p3.start(); 
+}
+
+function trig4(){
+	p4.start(); 
+}
+function trig5(){
+	setTimeout(trig1, 250 );
+	setTimeout(trig2, 550);
+	setTimeout(trig3, 1250);
+	setTimeout(trig2, 2000);
+	setTimeout(trig4, 2300);
+}
+
+
+</script>
+
+</body>
+</html>

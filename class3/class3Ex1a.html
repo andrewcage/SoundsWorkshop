@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>This is a sequence of notes</title>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+
+</head>
+
+<body>
+
+
+<!-- <button onclick="trigAR()"> 
+trigger attack and release  
+</button> -->
+
+
+<button onclick="trigSeq1()"> 
+trigger 1   
+</button>
+
+<button onclick="trigSeq2()"> 
+trigger 2  
+</button>
+<button onclick="trigSeq3()"> 
+trigger 3  
+</button>
+
+<button onclick="trigSeq4()"> 
+trigger 3  
+</button>
+
+<script type="text/javascript"> 
+
+console.log("make a sequence of sounds"); 
+
+var synth = new Tone.FMSynth().toMaster(); 
+
+
+function trigSeq1(){
+	synth.triggerAttackRelease('C4', 0.1);
+}
+
+function trigSeq2(){
+	synth.triggerAttackRelease('C3', 0.3);
+}
+function trigSeq3(){
+	synth.triggerAttackRelease('C5', 0.3);
+}
+
+function trigSeq4(){
+	setTimeout(trigSeq1, 1000);
+	setTimeout(trigSeq3, 1500);
+	setTimeout(trigSeq2, 2000);
+}
+
+</script>
+
+</body>
+</html>

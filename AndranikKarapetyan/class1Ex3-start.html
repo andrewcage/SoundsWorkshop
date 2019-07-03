@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>class 1 basic html</title>
+
+<style type="text/css"></style>
+
+
+
+
+</head>
+
+
+<body>
+
+	<audio loop id="mySong"> 
+		 <source src="Deutschland.mp3" type="audio/mpeg">
+
+	</audio>
+
+	<!-- <audio controls loop></audio> -->
+	
+	<button onclick="start()" id="start">start</button>
+
+	<button onclick="stop()" id="stop">stop</button>
+	<br> 
+	<br> 
+	<button onclick="rando()" id="randomLoc">random location </button>
+	<br> 
+	<br>
+	<button onclick="randomRate()" id="randomRate">random rate</button>
+	<br> 
+	<br>
+	<label> rate</label><input type="range" onChange="playRate(this)" min="0" max="200"/> 
+	<br>
+	<label> volume</label><input type="range" onChange="volume(this)" min="0" max="100"/> 
+
+
+
+
+<script type="text/javascript"> 
+
+var song = document.getElementById("mySong"); 
+
+function start(){
+	song.play(); 
+}
+
+function stop(){
+	song.pause(); 
+}
+
+function rando(){
+
+	var dur = song.duration
+
+	var rDur = dur * Math.random()
+	song.currentTime = rDur
+
+	console.log("the random location is ", rDur); 
+
+}
+
+
+function playRate(element){
+	var intRate = parseInt(element.value);
+	//convert this integer into a floating point number in the range of 0.0 to 2.0
+	song.playbackRate = intRate/100
+	console.log(element.value); 
+}
+
+function volume(element){
+	var vInt = parseInt(element.value);
+	//convert this integer to a floating point number (decimal) between 0.0 and 1.0
+	song.volume = vInt/100
+	console.log("the volume is ", vInt); 
+}
+
+function randomRate(){
+	var rate = song.playbackRate
+
+	var rRate = rate * 2 * Math.random()
+
+	song.playbackRate = rRate
+
+	console.log("the random rate is", rRate)
+}
+
+
+</script>
+
+</body>
+</html>

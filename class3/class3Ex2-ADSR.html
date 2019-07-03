@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADSR two ways </title>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+
+</head>
+
+<body>
+
+
+<button onclick="trig1()"> 
+trigger 1  
+</button>
+
+<button onclick="trig2()"> 
+trigger 2 
+</button>
+
+<button onclick="trig3()"> 
+trigger 3  
+</button>
+
+<button onclick="trig4()"> 
+trigger 4  
+</button>
+
+<script type="text/javascript"> 
+
+console.log("ADSR class 3"); 
+//look at the website below to see the parameters for the amplitude envelope in tone.js
+//https://tonejs.github.io/docs/r13/AmplitudeEnvelope
+
+var osc = new Tone.Oscillator({
+			"type" : "sawtooth",
+			"frequency" : 220,
+			"volume" : 0
+
+}); 
+
+
+// var env = new Tone.AmplitudeEnvelope(.5, .2, .2, .1); 
+
+
+var env = new Tone.AmplitudeEnvelope({
+	"attack" : 0.1,
+	"decay" : 0.1,
+	"sustain" : .2,
+	"release" : 0.1,
+}); 
+
+osc.connect(env);
+env.toMaster(); 
+
+
+
+function trig1(){
+	osc.frequency.value = "C4"; 
+	env.triggerAttackRelease(.2);
+}
+
+function trig2(){
+	osc.frequency.value = "G4"; 
+	env.triggerAttackRelease(.2);
+}
+
+function trig3(){
+	osc.frequency.value = "F3"; 
+	env.triggerAttackRelease(.2);
+}
+function trig4(){
+	setTimeout(trig1, 250 );
+	setTimeout(trig2, 550);
+	setTimeout(trig3, 1250);
+	setTimeout(trig2, 2000);
+}
+osc.start(); 
+
+</script>
+
+</body>
+</html>
