@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>step sequencer with synth</title>
+
+<!-- <script type="text/javascript" src="../build/Tone.js"> </script> -->
+
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
+
+</head>
+
+<body>
+
+<button onClick="stop()"> 
+stop
+</button>
+
+
+<button onClick="start()"> 
+start
+</button>
+
+<br>
+<label> kick volume</label><input type="range" onChange="v1(this)" min="-100" max="0"/>
+
+<br>
+<label> snare volume</label><input type="range" onChange="v2(this)" min="-100" max="0"/> 
+
+<br>
+<label> hi-hat volume </label><input type="range" onChange="v3(this)" min="-100" max="0"/> 
+<br>
+
+<br>
+<label> bpm</label><input type="range" onChange="setTempo(this)" min="20" max="160"/> 
+<!-- <label> delay</label><input type="range" onChange="v3(this)" min="-100" max="0"/>  -->
+
+<script type="text/javascript"> 
+ 
+console.log("step sequencer example"); 
+
+var steps = [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1]; 
+var steps2 = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0];
+var steps3 = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
+
+var p1 = new Tone.Player("audio/kick.wav").toMaster();
+var p2 = new Tone.Player("audio/snare.wav").toMaster();
+var p3 = new Tone.Player("audio/hihat.wav").toMaster();
+// var p4 = new Tone.Player("audio/m2.mp3").toMaster();
+// var p5 = new Tone.Player("audio/m3.mp3").toMaster();
+p1.loop.value = 'false'; 
+p2.loop.value = 'false'; 
+p3.loop.value = 'false'; 
+// p4.loop.value = 'false'; 
+// p5.loop.value = 'false'; 
+//var notes3 = ["C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4"]
+// var notes = ["C#3", "D#3","F#3", "G3", "G#3", "A#3", "C#4"]
+// var notes2 = ["C#2", "D#2","A#2"]
+
+function v1(element){
+	var vv1 = parseInt(element.value);
+	p1.volume.value = vv1;  
+	console.log("vol1 is " + vv1); 
+	}
+
+function v2(element){
+	var vv2 = parseInt(element.value);
+	p2.volume.value = vv2; 
+	console.log("vol2 is " + vv2);
+	}
+
+function v3(element){
+	var vv3 = parseInt(element.value);
+	p3.volume.value = vv3; 
+	console.log("vol3 is " + vv3);
+	}
+
+
+var stepIndex = 0;
+
+function step(time) {
+		if (steps[stepIndex] === 1){
+			p1.start(); 
+		}
+		if (steps2[stepIndex] === 1){
+			p2.start(); 
+		}
+		
+		if (steps3[stepIndex] === 1) {
+			p3.start(); 
+			
+		}
+		
+		//console.log("the step index is " + stepIndex );
+		stepIndex++; 
+		if (stepIndex >= steps.length) {
+			console.log("the loop has started")
+			stepIndex = 0;
+		}
+}
+//this sets up a call back to be invoked every 8th note. 
+Tone.Transport.scheduleRepeat(step, Tone.Time('8n'),'0m')
+Tone.Transport.bpm.value = 160;
+
+function stop(){
+	Tone.Transport.stop(); 
+}
+
+function start(){
+	Tone.Transport.start(); 
+}
+
+function setTempo(element){
+	var btPerMin = parseInt(element.value);
+	Tone.Transport.bpm.value = btPerMin; 
+	console.log(element.value); 
+}
+
+
+ 
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
